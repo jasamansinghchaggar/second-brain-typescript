@@ -4,13 +4,22 @@ import { ErrorHandler } from "../utils/errorHandler";
 import { cookieOptions } from "../utils/cookieOptions";
 import { AuthRequest } from "../middlewares/auth.middleware";
 import { comparePassword, hashPassword } from "../utils/hashPassword";
-import { createUser, getUserByEmail } from "../services/user.service";
+import { createUser, getUserByEmail, getUserById } from "../services/user.service";
 import { loginSchema, signupSchema } from "../validators/auth.validator";
 
-export const getProfile = (req: AuthRequest, res: Response): void => {
-  res
-    .status(200)
-    .json({ message: "Welcome to the authentication API", user: req.user });
+export const getProfile = async (req: AuthRequest, res: Response): Promise<any> => {
+  try {
+    const userId = req.user?._id as string;
+    const user = await getUserById(userId);
+    if (!user) {
+      return ErrorHandler.notFound(res, null, "User not found");
+    }
+    const userObj = user.toObject();
+    const { password, ...userData } = userObj;
+    res.status(200).json({ message: "User profile fetched successfully", user: userData });
+  } catch (err) {
+    ErrorHandler.internal(res, err);
+  }
 };
 
 export const signup = async (req: Request, res: Response): Promise<any> => {
