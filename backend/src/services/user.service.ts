@@ -6,7 +6,7 @@ export const getUserByEmail = async (email: string): Promise<IUser | null> => {
 
 export const createUser = async (
   email: string,
-  password: Promise<string>,
+  password: string,
   username: string
 ): Promise<IUser> => {
   const newUser = new User({ email, password, username });

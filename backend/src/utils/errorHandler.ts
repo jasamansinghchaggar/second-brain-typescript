@@ -18,7 +18,7 @@ export class ErrorHandler {
   }
 
   static internal(res: Response, error: any, message = "Server Error") {
-    res.status(500).json({ message, error });
+    res.status(500).json({ message, error: error?.message || error });
   }
 
   static custom(res: Response, error: any, statusCode = 500, message = "Error") {

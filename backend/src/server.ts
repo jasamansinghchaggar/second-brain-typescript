@@ -1,11 +1,12 @@
 import dotenv from "dotenv"
+dotenv.config();
+
 import express from "express";
 import authRoutes from "./routes/auth.routes";
 import cookieParser from "cookie-parser";
 import { connectDB } from "./config/db";
 import contentRoutes from "./routes/content.routes";
 
-dotenv.config()
 
 // Initialize Express app
 const app = express()

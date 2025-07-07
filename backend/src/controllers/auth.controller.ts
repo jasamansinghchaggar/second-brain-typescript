@@ -28,7 +28,7 @@ export const signup = async (req: Request, res: Response): Promise<any> => {
     if (existingUser) {
       return ErrorHandler.conflict(res, null, "User already exists");
     }
-    const hashedPassword = hashPassword(password);
+    const hashedPassword = await hashPassword(password);
     const user = (await createUser(email, hashedPassword, username)).save();
     res.status(200).json({ message: "User created successfully" });
   } catch (err) {
@@ -56,7 +56,6 @@ export const signin = async (req: Request, res: Response): Promise<any> => {
       return ErrorHandler.unauthorized(res, null, "Invalid credentials");
     }
     const token = signJwt({ userId: user._id });
-
     res.cookie("accessToken", token, cookieOptions as Object);
     res.status(200).json({ message: "Login successful", userId: user._id });
   } catch (err) {

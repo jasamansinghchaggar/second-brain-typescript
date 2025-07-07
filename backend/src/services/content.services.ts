@@ -1,5 +1,5 @@
 import Content, { IContent } from "../models/content.model";
-import { ITag } from "../models/tags.model";
+import Tag, { ITag } from "../models/tags.model";
 
 export const getAllContentByUserId = async (userId: string) => {
   return await Content.find({ userId });
@@ -25,10 +25,10 @@ export const deleteContentById = async (
 };
 
 export const getTagByTitle = async (title: string): Promise<ITag> => {
-  return (await Content.findOne({ title })) as ITag;
+  return (await Tag.findOne({ title })) as ITag;
 };
 
 export const createTag = async (title: string): Promise<ITag> => {
-  const tag = new Content({ title });
-  return tag as ITag;
+  const tag = new Tag({ title });
+  return await tag.save();
 };
