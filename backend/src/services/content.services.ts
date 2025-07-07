@@ -2,7 +2,7 @@ import Content, { IContent } from "../models/content.model";
 import Tag, { ITag } from "../models/tags.model";
 
 export const getAllContentByUserId = async (userId: string) => {
-  return await Content.find({ userId });
+  return await Content.find({ userId }).populate('tags', 'title');
 };
 
 export const getContentById = async (id: string): Promise<IContent | null> => {
