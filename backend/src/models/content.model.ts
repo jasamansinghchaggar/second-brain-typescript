@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document, Types } from "mongoose";
 
-export const contentTypes = ["image", "video", "article", "audio", "doc", "link"] as const;
+export const contentTypes = ["linkedin", "youtube", "notion", "instagram", "other"] as const;
 
 export interface IContent extends Document {
   link: string;
