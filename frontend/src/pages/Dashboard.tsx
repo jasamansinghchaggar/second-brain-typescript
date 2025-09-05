@@ -205,7 +205,7 @@ const Dashboard = () => {
 
         {/* Notes grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {(filterType ? contents.filter(item => item.type === filterType) : contents).map(item => (
+          {(Array.isArray(contents) ? (filterType ? contents.filter(item => item.type === filterType) : contents) : []).map(item => (
             <Card key={item._id} className="relative border border-border shadow-lg rounded-2xl p-6" style={{ boxShadow: '0 2px 16px 0 rgba(0,0,0,0.12)' }}>
               <div className="flex  items-center gap-3">
                 {item.type === 'linkedin' ? <RiLinkedinBoxFill /> :
