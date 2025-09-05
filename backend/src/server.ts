@@ -12,7 +12,7 @@ import contentRoutes from "./routes/content.routes";
 // Initialize Express app
 const app = express()
 
-const allowedOrigins = process.env.FRONTEND_URL?.split(",");
+const allowedOrigins = process.env.FRONTEND_URL
 
 app.use(cors({
     origin: allowedOrigins,
